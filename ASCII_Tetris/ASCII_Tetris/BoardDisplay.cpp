@@ -1,10 +1,10 @@
 #include "stdafx.h"
 #include "BoardDisplay.h"
 
-void BoardDisplay::displayBoard(const Board &board, const ConsoleLibrary &console) const{
+void BoardDisplay::displayBoard(const Board &board, const ConsoleLibrary &console) const{	
 	const std::vector<char> boardRows(board.getBoard());
 	std::string boardRow;
-	for (int row = 0; row < board.getHeight() - 1; ++row) {
+	for (int row = 2; row < board.getHeight() - 1; ++row) {
 		boardRow = "";
 		for (int col = 0; col < board.getWidth(); ++col) {
 			switch (boardRows.at(row * board.getWidth() + col)) {
@@ -30,4 +30,11 @@ void BoardDisplay::displayBoard(const Board &board, const ConsoleLibrary &consol
 	}
 	boardRow += m_Corner;
 	console.OutputString(boardRow);
+}
+
+void BoardDisplay::displayScore(int score, ConsoleLibrary &console){
+	COORD scorePosition = { 30, 1 };
+	console.SetPosition(scorePosition);
+	console.OutputString("Score: ");
+	console.OutputString(std::to_string(score));
 }

@@ -14,4 +14,5 @@ public:
 	BoardDisplay() : m_Segment("[]"), m_EmptySegment("  "), m_SideBorder("|"), m_BottomBorder("--"), m_Corner("+") {}
 	~BoardDisplay() {}
 	void displayBoard(const Board &board, const ConsoleLibrary &console) const;
+	void displayScore(int score, ConsoleLibrary &console);
 };
