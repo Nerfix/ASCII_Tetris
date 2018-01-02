@@ -38,3 +38,17 @@ void BoardDisplay::displayScore(int score, ConsoleLibrary &console){
 	console.OutputString("Score: ");
 	console.OutputString(std::to_string(score));
 }
+
+void BoardDisplay::displayControls(ConsoleLibrary &console) {
+	console.SetPosition({ 30, 6 });
+	console.OutputString("Left: A");
+
+	console.SetPosition({ 30, 7 });
+	console.OutputString("Right: D");
+
+	console.SetPosition({ 30, 8 });
+	console.OutputString("Down: S");
+
+	console.SetPosition({ 30, 9 });
+	console.OutputString("Rotate: W");
+}

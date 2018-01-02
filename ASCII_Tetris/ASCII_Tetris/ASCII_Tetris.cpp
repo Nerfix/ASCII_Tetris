@@ -136,6 +136,8 @@ int main()
 		console.Clear();
 		boardDisplay.displayBoard(board, console);
 		boardDisplay.displayScore(score, console);
+		boardDisplay.displayControls(console);
+		console.SetPosition({ 0, 20 });
 		
 	}
 

@@ -15,4 +15,5 @@ public:
 	~BoardDisplay() {}
 	void displayBoard(const Board &board, const ConsoleLibrary &console) const;
 	void displayScore(int score, ConsoleLibrary &console);
+	void displayControls(ConsoleLibrary &console);
 };
