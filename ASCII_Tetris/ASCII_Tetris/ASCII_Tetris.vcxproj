@@ -148,6 +148,7 @@
     <ClInclude Include="Board.h" />
     <ClInclude Include="BoardDisplay.h" />
     <ClInclude Include="ConsoleLibrary.h" />
+    <ClInclude Include="KeyHandle.h" />
     <ClInclude Include="Tetromino.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />

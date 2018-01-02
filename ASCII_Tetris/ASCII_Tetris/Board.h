@@ -46,5 +46,4 @@ public:
 	void rotateShape(Tetromino &shape, const COORD &position);
 	int clearCompleteRows(void);
 	void collapseRows(void);
-	void printBoard(void);// for testing
 };
