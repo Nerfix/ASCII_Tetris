@@ -34,7 +34,6 @@ void Board::clear() {
 }
 
 void Board::initialize() {
-	//clear();
 	m_Board.assign(calculateSize(), ' ');
 	initializeBorder();
 }
@@ -56,41 +55,12 @@ int Board::getHeight() const{
 	return m_TotalHeight;
 }
 
-void Board::printBoard() {
-	for (int row = 0; row < (m_TotalHeight * m_TotalWidth) - m_TotalWidth; row += m_TotalWidth) {
-		
-		std::cout << m_SideBorder;
-
-		for (int col = 1; col < (m_TotalWidth - 1); ++col) {
-			if (m_Board.at(row + col) == ' ') {
-				std::cout << m_EmptyCell << m_EmptyCell;
-			}
-			else if (m_Board.at(row + col) == 'X') {
-				std::cout << m_SegmentLeftHalf << m_SegmentRightHalf;
-			}
-		}
-
-		std::cout << m_SideBorder;
-		std::cout << std::endl;
-	}
-
-	int row = m_TotalHeight - 1;
-	std::cout << m_Corner;
-
-	for (int col = 1; col < (m_TotalWidth - 1); ++col) {
-		std::cout << m_BottomBorder << m_BottomBorder;
-	}
-
-	std::cout << m_Corner;
-	std::cout << std::endl;
-}
-
 bool Board::segmentFits(const COORD &segment, const COORD &position) {
 	bool segmentFits(true);
 	int xCoordinate = segment.X + position.X;
 	int yCoordinate = segment.Y + position.Y;
 
-	if (m_Board.at(yCoordinate * m_TotalWidth + xCoordinate) == m_EmptyCell) {
+	if (m_Board.at(yCoordinate * m_TotalWidth + xCoordinate) == m_Empty) {
 		return segmentFits;
 	}
 
@@ -106,10 +76,10 @@ bool Board::shapeFits(Tetromino &tetromino, const COORD &position) {
 	return shapeFits;
 }
 
-void Board::addShape(Tetromino &tetromino, const COORD &position) {
+bool Board::addShape(Tetromino &tetromino, const COORD &position) {
 
 	if (!shapeFits(tetromino, position))
-		return;
+		return false;
 	
 	for (auto segment : tetromino.GetSegments()) {
 		COORD segmentPosition;
@@ -117,6 +87,7 @@ void Board::addShape(Tetromino &tetromino, const COORD &position) {
 		
 		addSegment(segmentPosition);
 	}
+	return true;
 }
 
 void Board::addSegment(const COORD &position) {
@@ -176,6 +147,7 @@ void Board::rotateShape(Tetromino &tetromino, const COORD &position) {
 	}
 
 	addShape(rotatedTetromino, position);
+	tetromino = rotatedTetromino;
 }
 
 void Board::clearRow(int row) {
@@ -189,8 +161,9 @@ void Board::clearRow(int row) {
 
 int Board::clearCompleteRows(void) {
 	int rowsCleared = 0;
-	bool rowIsFull = true;
+	bool rowIsFull;
 	for (int row = 0; row < m_TotalHeight - 1; ++row) {
+		rowIsFull = true;
 		for (int col = 1; col < m_TotalWidth - 1; ++col) {
 			if (m_Board.at(row * m_TotalWidth + col) != m_Shape)
 				rowIsFull = false;

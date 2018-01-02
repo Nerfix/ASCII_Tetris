@@ -5,14 +5,6 @@
 
 class Board {
 private:
-	// TODO for printing - take out to a separate class
-	const char m_SegmentLeftHalf;
-	const char m_SegmentRightHalf;
-	const char m_EmptyCell;
-	const char m_SideBorder;
-	const char m_BottomBorder;
-	const char m_Corner;
-
 	int m_Width;
 	int m_Height;
 	int m_TotalWidth;
@@ -37,7 +29,7 @@ public:
 	static constexpr char m_Empty = ' ';
 	static constexpr char m_Border = '#';
 
-	Board(int width, int height) : m_Width(width), m_Height(height), m_SegmentLeftHalf('['), m_SegmentRightHalf(']'), m_EmptyCell(' '), m_SideBorder('|'), m_BottomBorder('-'), m_Corner('+') { 
+	Board(int width, int height) : m_Width(width), m_Height(height) { 
 		m_Board.reserve(calculateSize());
 		m_TotalWidth = width + 2;
 		m_TotalHeight = height + 3;
@@ -48,7 +40,7 @@ public:
 	const std::vector<char>& getBoard() const;
 	int getWidth() const;
 	int getHeight() const;
-	void addShape(Tetromino &shape, const COORD &position);
+	bool addShape(Tetromino &shape, const COORD &position);
 	void removeShape(Tetromino &shape, const COORD &position);
 	bool moveShape(Tetromino &shape, COORD &position, const COORD &direction);
 	void rotateShape(Tetromino &shape, const COORD &position);
